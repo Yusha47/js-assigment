@@ -2,8 +2,9 @@ import { touristPlaces } from "../data/data.js";
 
 class TouristPlacesTable {
     constructor(data) {
-        this.originalData = [...data];
-        this.data = data;
+        this.localStorageKey = "touristPlacesData";
+        this.originalData = this.loadFromLocalStorage() || [...data];
+        this.data = [...this.originalData];
         this.tableBody = document.querySelector("tbody");
         this.searchInput = document.getElementById("search-bar");
 
@@ -17,6 +18,17 @@ class TouristPlacesTable {
         this.cancelButton = document.getElementById("cancel-btn");
 
         this.currentUpdateIndex = null; // Track which place is being updated
+    }
+
+    // Save data to localStorage
+    saveToLocalStorage() {
+        localStorage.setItem(this.localStorageKey, JSON.stringify(this.originalData));
+    }
+
+    // Load data from localStorage
+    loadFromLocalStorage() {
+        const data = localStorage.getItem(this.localStorageKey);
+        return data ? JSON.parse(data) : null;
     }
 
     createRow(place, index) {
@@ -56,6 +68,8 @@ class TouristPlacesTable {
     handleDelete(e) {
         const index = e.target.getAttribute("data-index");
         this.data.splice(index, 1);
+        this.originalData = [...this.data]; // Update originalData
+        this.saveToLocalStorage(); // Save updated data
         this.populateTable();
     }
 
@@ -86,7 +100,8 @@ class TouristPlacesTable {
                 picture: this.pictureInput.value,
             };
 
-            // Close modal and re-render table
+            this.originalData = [...this.data]; // Update originalData
+            this.saveToLocalStorage(); // Save updated data
             this.modal.style.display = "none";
             this.populateTable();
         });
@@ -102,7 +117,7 @@ class TouristPlacesTable {
             this.data = this.originalData.filter((place) =>
                 place.name.toLowerCase().includes(query)
             );
-            this.populateTable();
+            this.populateTable(); // Reflect filtered data dynamically
         });
     }
 }

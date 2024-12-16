@@ -49,7 +49,8 @@ label {
     width: 150px;
 }
 
-input, select {
+input,
+select {
     flex-grow: 1;
     padding: 10px;
     font-size: 16px;
@@ -59,7 +60,8 @@ input, select {
 }
 
 /* Buttons */
-button[type="submit"], button[type="reset"] {
+button[type="submit"],
+button[type="reset"] {
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 6px;
@@ -77,8 +79,9 @@ button[type="reset"] {
     background-color: #ffc107;
     color: #ffffff;
 }
-button:hover{
-    opacity:0.8;
+
+button:hover {
+    opacity: 0.8;
 }
 
 .form-actions {
@@ -117,6 +120,7 @@ button:hover{
 .back-link:hover {
     text-decoration: underline;
 }
+
 /* Responsive Container */
 .responsive-container {
     display: flex;
@@ -137,18 +141,21 @@ button:hover{
 
 #search-bar {
     width: 100%;
-    padding: 15px; /* Increased padding for a larger height */
+    padding: 15px;
+    /* Increased padding for a larger height */
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    background-color: #efefef; /* Changed to #efefef */
+    background-color: #efefef;
+    /* Changed to #efefef */
 }
 
 /* Table Styling */
 .table-container {
     width: 100%;
     max-width: 1200px;
-    overflow-x: auto; /* For responsiveness on smaller devices */
+    overflow-x: auto;
+    /* For responsiveness on smaller devices */
     margin-bottom: 20px;
 }
 
@@ -158,35 +165,46 @@ table {
     font-size: 16px;
 }
 
-th, td {
-    border: 1px solid #ccc; /* Light border around cells */
-    text-align: center; /* Center-align the text */
-    padding: 20px; /* Increased padding for larger row height */
+th,
+td {
+    border: 1px solid #ccc;
+    /* Light border around cells */
+    text-align: center;
+    /* Center-align the text */
+    padding: 20px;
+    /* Increased padding for larger row height */
 }
 
 th {
-    background-color: #000; /* Black background for header */
-    color: #fff; /* White text in header */
+    background-color: #000;
+    /* Black background for header */
+    color: #fff;
+    /* White text in header */
     font-weight: bold;
 }
 
 tr:nth-child(even) {
-    background-color: #efefef; /* Light gray background for even rows */
+    background-color: #efefef;
+    /* Light gray background for even rows */
 }
 
 tr:nth-child(odd) {
-    background-color: #ffffff; /* White background for odd rows */
+    background-color: #ffffff;
+    /* White background for odd rows */
 }
 
 /* Image Styling in Table */
 table img {
-    width: 100px; /* Fixed width for consistency */
-    height: auto; /* Maintain aspect ratio */
+    width: 100px;
+    /* Fixed width for consistency */
+    height: auto;
+    /* Maintain aspect ratio */
     border-radius: 4px;
 }
 
 /* Action Buttons in Table */
-button.update-btn, button.delete-btn {
+button.update-btn,
+button.delete-btn {
     padding: 8px 15px;
     font-size: 14px;
     border-radius: 5px;
@@ -228,6 +246,7 @@ button:hover {
 #create-btn:hover {
     background-color: #0056b3;
 }
+
 .modal {
     position: fixed;
     top: 0;
@@ -238,31 +257,62 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .modal-content {
+.modal-content {
     background: #fff;
-    padding: 20px;
+    padding: 25px;
     border-radius: 8px;
-    width: 300px;
+    width: 350px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+}
 
-  label, input {
+label {
     display: block;
-    width: 100%;
-    margin-bottom: 10px;
-  }
+    margin-bottom: 5px;
+    font-weight: bold;
+}
 
-  button {
-    margin-right: 10px;
-  }
+input {
+    display: block;
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    
+}
+
+#cancel-btn {
+    padding: 11px 11px;
+
+    width: 50%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+}
+
+#cancel-btn:hover {
+    background-color: #c82333;
+}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    th, td {
+
+    th,
+    td {
         font-size: 14px;
-        padding: 15px; /* Slightly reduced padding for smaller screens */
+        padding: 15px;
+        /* Slightly reduced padding for smaller screens */
     }
 
     table img {
@@ -276,7 +326,8 @@ button:hover {
         padding: 10px;
     }
 
-    button.update-btn, button.delete-btn {
+    button.update-btn,
+    button.delete-btn {
         font-size: 12px;
         padding: 6px 10px;
     }
