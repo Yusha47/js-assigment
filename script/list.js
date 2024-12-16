@@ -2,8 +2,10 @@ import { touristPlaces } from "../data/data.js";
 
 class TouristPlacesTable {
     constructor(data) {
-        this.data = data; // Store the data (tourist places)
+        this.originalData = [...data]; // Keep original data for search
+        this.data = data; // Data currently displayed
         this.tableBody = document.querySelector("tbody"); // Table body element
+        this.searchInput = document.getElementById("search-bar"); // Search bar input
     }
 
     // Function to create a row for a single tourist place
@@ -22,7 +24,7 @@ class TouristPlacesTable {
         return row;
     }
 
-    // Function to populate the table with tourist places, sorted by rating
+    // Function to populate the table with tourist places
     populateTable() {
         this.tableBody.innerHTML = ""; // Clear existing rows
 
@@ -41,12 +43,10 @@ class TouristPlacesTable {
 
     // Function to add event listeners for update and delete buttons
     addActionListeners() {
-        // Attach event listeners to the delete buttons
         document.querySelectorAll(".delete-btn").forEach((button) => {
             button.addEventListener("click", (e) => this.handleDelete(e));
         });
 
-        // Attach event listeners to the update buttons
         document.querySelectorAll(".update-btn").forEach((button) => {
             button.addEventListener("click", (e) => this.handleUpdate(e));
         });
@@ -56,15 +56,29 @@ class TouristPlacesTable {
     handleDelete(e) {
         const index = e.target.getAttribute("data-index");
         this.data.splice(index, 1); // Remove place from array
-        this.populateTable(); // Re-render the table
+        this.populateTable();
     }
 
     // Function to handle the update action
     handleUpdate(e) {
         const index = e.target.getAttribute("data-index");
         const place = this.data[index];
-        console.log("Update place:", place);
         alert(`Update feature is under development for: ${place.name}`);
+    }
+
+    // Function to handle search input
+    handleSearch() {
+        this.searchInput.addEventListener("input", (e) => {
+            const query = e.target.value.toLowerCase();
+
+            // Filter the original data based on search query
+            this.data = this.originalData.filter((place) =>
+                place.name.toLowerCase().includes(query)
+            );
+
+            // Re-populate the table with filtered data
+            this.populateTable();
+        });
     }
 }
 
@@ -72,4 +86,5 @@ class TouristPlacesTable {
 document.addEventListener("DOMContentLoaded", () => {
     const touristTable = new TouristPlacesTable(touristPlaces);
     touristTable.populateTable();
+    touristTable.handleSearch(); // Activate search functionality
 });
