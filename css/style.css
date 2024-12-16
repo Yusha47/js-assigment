@@ -1,0 +1,259 @@
+/* Container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f8f8;
+    padding: 30px;
+}
+
+/* Box containing the form */
+.box {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Heading */
+.heading-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#tourist-heading {
+    font-family: 'Parkinsans', sans-serif;
+    font-weight: 700;
+    color: #333333;
+    font-size: 28px;
+}
+
+/* Form group */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 18px;
+    color: #555555;
+    margin-right: 20px;
+    width: 150px;
+}
+
+input, select {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: rgb(239, 239, 239);
+}
+
+/* Buttons */
+button[type="submit"], button[type="reset"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    color: #ffffff;
+}
+
+button[type="reset"] {
+    background-color: #ffc107;
+    color: #ffffff;
+}
+button:hover{
+    opacity:0.8;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Back link */
+.back-link-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.back-link {
+    color: #007bff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+
+.back-link {
+    color: #007bff;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+/* Responsive Container */
+.responsive-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+/* Search Bar Styling */
+.search-container {
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 15px; /* Increased padding for a larger height */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #efefef; /* Changed to #efefef */
+}
+
+/* Table Styling */
+.table-container {
+    width: 100%;
+    max-width: 1200px;
+    overflow-x: auto; /* For responsiveness on smaller devices */
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+th, td {
+    border: 1px solid #ccc; /* Light border around cells */
+    text-align: center; /* Center-align the text */
+    padding: 20px; /* Increased padding for larger row height */
+}
+
+th {
+    background-color: #000; /* Black background for header */
+    color: #fff; /* White text in header */
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #efefef; /* Light gray background for even rows */
+}
+
+tr:nth-child(odd) {
+    background-color: #ffffff; /* White background for odd rows */
+}
+
+/* Image Styling in Table */
+table img {
+    width: 100px; /* Fixed width for consistency */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 4px;
+}
+
+/* Action Buttons in Table */
+button.update-btn, button.delete-btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button.update-btn {
+    background-color: #007bff;
+    color: #fff;
+}
+
+button.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Create Button */
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#create-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+#create-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 14px;
+        padding: 15px; /* Slightly reduced padding for smaller screens */
+    }
+
+    table img {
+        width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    #search-bar {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    button.update-btn, button.delete-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    #create-btn {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
