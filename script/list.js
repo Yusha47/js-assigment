@@ -22,7 +22,7 @@ class TouristPlacesTable {
 
     // Save data to localStorage
     saveToLocalStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.originalData));
+        localStorage.setItem(this.localStorageKey, JSON.stringify(this.data));
     }
 
     // Load data from localStorage
@@ -68,8 +68,8 @@ class TouristPlacesTable {
     handleDelete(e) {
         const index = e.target.getAttribute("data-index");
         this.data.splice(index, 1);
-        this.originalData = [...this.data]; // Update originalData
-        this.saveToLocalStorage(); // Save updated data
+        this.originalData = [...this.data]; 
+        this.saveToLocalStorage(); 
         this.populateTable();
     }
 
@@ -77,7 +77,7 @@ class TouristPlacesTable {
         const index = e.target.getAttribute("data-index");
         const place = this.data[index];
 
-        // Fill modal form with existing data
+      
         this.nameInput.value = place.name;
         this.addressInput.value = place.address;
         this.ratingInput.value = place.rating;
@@ -85,14 +85,14 @@ class TouristPlacesTable {
 
         // Show modal
         this.modal.style.display = "flex";
-        this.currentUpdateIndex = index; // Track which place is being updated
+        this.currentUpdateIndex = index; 
     }
 
     handleFormSubmit() {
         this.form.addEventListener("submit", (e) => {
             e.preventDefault();
 
-            // Update the tourist place with new values
+            
             this.data[this.currentUpdateIndex] = {
                 name: this.nameInput.value,
                 address: this.addressInput.value,
@@ -100,8 +100,8 @@ class TouristPlacesTable {
                 picture: this.pictureInput.value,
             };
 
-            this.originalData = [...this.data]; // Update originalData
-            this.saveToLocalStorage(); // Save updated data
+            this.originalData = [...this.data]; 
+            this.saveToLocalStorage(); 
             this.modal.style.display = "none";
             this.populateTable();
         });
@@ -117,13 +117,25 @@ class TouristPlacesTable {
             this.data = this.originalData.filter((place) =>
                 place.name.toLowerCase().includes(query)
             );
-            this.populateTable(); // Reflect filtered data dynamically
+            this.populateTable(); 
         });
     }
 }
 
+// Call the DOMContentLoaded event to initialize the table
 document.addEventListener("DOMContentLoaded", () => {
-    const touristTable = new TouristPlacesTable(touristPlaces);
+    const localStorageKey = "touristPlacesData";
+
+
+    if (!localStorage.getItem(localStorageKey)) {
+        localStorage.setItem(localStorageKey, JSON.stringify(touristPlaces));
+    }
+
+    const storedPlaces = JSON.parse(localStorage.getItem(localStorageKey));
+
+    const touristTable = new TouristPlacesTable(storedPlaces);
+
+ 
     touristTable.populateTable();
     touristTable.handleSearch();
     touristTable.handleFormSubmit();
