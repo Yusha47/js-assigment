@@ -1,54 +1,74 @@
-// Data Storage Key for Local Storage
-const STORAGE_KEY = 'tourist_places';
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  const localStorageKey = "touristPlacesData";
 
-// Function to Get Data from Local Storage
-function getPlaces() {
-  const data = localStorage.getItem(STORAGE_KEY);
-  return data ? JSON.parse(data) : [];
-}
+  // Retrieve existing data from localStorage
+  function loadFromLocalStorage() {
+    const data = localStorage.getItem(localStorageKey);
+    return data ? JSON.parse(data) : [];
+  }
 
-// Function to Save Data to Local Storage
-function savePlaces(places) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(places));
-}
+  // Save data to localStorage
+  function saveToLocalStorage(data) {
+    localStorage.setItem(localStorageKey, JSON.stringify(data));
+  }
 
-// Add Tourist Place (index.html)
-function handleFormSubmit(event) {
-  event.preventDefault(); // Prevent form submission
+  // Convert image file to Base64 string
+  function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
 
-  // Get form values
-  const name = document.getElementById('name').value;
-  const address = document.getElementById('address').value;
-  const rating = document.getElementById('rating').value;
-  const type = document.getElementById('type').value;
-  const picture = document.getElementById('picture').files[0];
+  // Handle form submission
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Prevent form from reloading the page
 
-  // Convert picture to Base64
-  const reader = new FileReader();
-  reader.onload = function () {
-    const places = getPlaces();
+    // Get input values
+    const name = document.getElementById("name").value.trim();
+    const address = document.getElementById("address").value.trim();
+    const rating = parseInt(document.getElementById("rating").value);
+    const type = document.getElementById("type").value;
 
-    // Add new place
-    places.push({
+    const pictureInput = document.getElementById("picture");
+    let picture = "default-placeholder.jpg"; // Default picture
+
+    // If an image is selected, convert it to Base64
+    if (pictureInput.files[0]) {
+      try {
+        picture = await getBase64(pictureInput.files[0]);
+      } catch (error) {
+        console.error("Error reading the image file:", error);
+        alert("Failed to upload the image. Please try again.");
+        return;
+      }
+    }
+
+    // Validate inputs
+    if (!name || !address || !rating || !type) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    // Create a new place object
+    const newPlace = {
       name,
       address,
       rating,
       type,
-      picture: reader.result,
-    });
+      picture,
+    };
 
-    // Save to Local Storage
-    savePlaces(places);
+    // Load existing data, add the new place, and save back to localStorage
+    const touristPlaces = loadFromLocalStorage();
+    touristPlaces.push(newPlace);
+    saveToLocalStorage(touristPlaces);
 
-    // Reset form and redirect
-    document.querySelector('form').reset();
-    alert('Tourist place added successfully!');
-    window.location.href = 'list.html';
-  };
-
-  if (picture) {
-    reader.readAsDataURL(picture);
-  } else {
-    alert('Please upload a picture.');
-  }
-}
+    // Redirect to the list page
+    alert("New tourist place added successfully!");
+    window.location.href = "list.html";
+  });
+});
